@@ -21,7 +21,7 @@ def load_data(file_path):
 # Lookup function
 def lookup_value(data, key):
     for row in data:
-        if row['Инвентарный номер'] == key:
+        if key in row['Инвентарный номер']:
             print(row)
             return row
 
@@ -33,7 +33,7 @@ table_data = load_data('List.csv')
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
     user_message = message.text.upper()
-    if len(user_message) == 9:
+    if len(user_message) <= 9:
         reply_message = f"You said: {user_message}"
 
         result = lookup_value(table_data, user_message)
@@ -42,7 +42,7 @@ def handle_message(message):
             reply_message = f'''
 Дата передачи: {result['Дата передачи']}
 
-*{user_message}*
+*{result['Инвентарный номер']}*
 {result['Основное средство']}
 
 {result['Местоположение']}
@@ -58,7 +58,7 @@ def handle_message(message):
         else:
             reply_message = 'Entry not found in the SEDS IT equipment list'
     else:
-        reply_message = "The inventory number should be 9 symbols long"
+        reply_message = "The inventory number (or its part) should not be more than 9 symbols long"
 
     bot.reply_to(message, reply_message, parse_mode='Markdown')
 

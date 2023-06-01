@@ -1,4 +1,5 @@
-1. Handle non-text
-2. Handle non-9-symbol inputs
-3. Add multiple inv.nums processing???
-4.
+- Handle partial inv.num input, when there are several matches
+- Handle non-text
++ Handle non-9-symbol inputs
+- Add multiple inv.nums processing???
+-
