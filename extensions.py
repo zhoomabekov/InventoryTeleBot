@@ -1,0 +1,4 @@
+
+
+class APIException(Exception):
+    pass
