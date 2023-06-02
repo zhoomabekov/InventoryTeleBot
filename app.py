@@ -22,7 +22,7 @@ def load_data(file_path):
 def lookup_value(data, key):
     for row in data:
         if key in row['Инвентарный номер']:
-            print(row)
+            print(row['Инвентарный номер'], row['Основное средство'])
             return row
 
 
@@ -37,7 +37,6 @@ def handle_message(message):
         reply_message = f"You said: {user_message}"
 
         result = lookup_value(table_data, user_message)
-        print(result)
         if result:
             reply_message = f'''
 Дата передачи: {result['Дата передачи']}
