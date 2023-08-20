@@ -36,6 +36,8 @@ def handle_message_2(message):
         results = lookup_values_list(table_data, user_message)
         if len(results) == 1:
             lookup_value(table_data, results[0]['Инвентарный номер'], message)
+        elif len(results) > 10:
+            bot.reply_to(message, 'Too many inv. numbers containing your input. Please provide more symbols...', parse_mode='Markdown')
         elif len(results) > 1:
             matching_inv_numbers = [i['Инвентарный номер'] for i in results]
 
@@ -77,6 +79,7 @@ def lookup_value(data, key, message):
 Актуальность данных: {row['АКТУАЛЬНОСТЬ']}
 '''
             bot.send_message(message.chat.id, reply_message, parse_mode='Markdown')
+
 
 
 bot.polling()
